@@ -28,9 +28,9 @@ app.get('/', (req, res) => {
 });
 
 // Serve React build
-app.use(express.static(path.join(__dirname, "Client/build")));
+app.use(express.static(path.join(__dirname, "client/build")));
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "Client/build", "index.html"));
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
 });
 
 // Connect MongoDB and start server

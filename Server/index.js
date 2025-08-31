@@ -2,32 +2,39 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const cookieParser = require("cookie-parser");
-const Mongoose = require('mongoose');
-const {authRouter} = require('./Routes');
-const app = express();
-const Port = 5000;
-app.use(express.static(path.join(__dirname, "client/build")));
+const mongoose = require('mongoose');
+const path = require("path");  // <--- added
+const { authRouter } = require('./Routes');
 
-app.use(cors());
-app.use(cookieParser()); 
+const app = express();
+const Port = process.env.PORT || 5000;
 
 dotenv.config();
 
+// Middleware
+app.use(cors());
+app.use(cookieParser());
+app.use(express.json()); // important for POST requests
 
-Mongoose.connect(process.env.MONGO_URL)
-.then(()=>{
-    // DB connected
-    console.log("MongoDb Connected Successfully");
+// API Routes (must come BEFORE React catch-all)
+app.use('/api/auth', authRouter);
 
-    // Backend Server
+// Serve React Build
+app.use(express.static(path.join(__dirname, "client/build")));
+
+mongoose.connect(process.env.MONGO_URL)
+.then(() => {
+    console.log("MongoDB Connected Successfully");
+
+    // React catch-all (after API routes)
     app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/build", "index.html"));
+        res.sendFile(path.join(__dirname, "client/build", "index.html"));
+    });
+
+    app.listen(Port, () => {
+        console.log("Server is running on Port", Port);
+    });
+})
+.catch((error) => {
+    console.log("Server Error", error);
 });
-    app.use('/api/auth',authRouter);
-    // Server Starting
-    app.listen(Port,()=>{
-        console.log("Server is Running on Port",Port)
-    })
-}).catch((error)=>{
-    console.log("Server Error",error)
-}) 

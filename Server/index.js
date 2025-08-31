@@ -20,9 +20,9 @@ Mongoose.connect(process.env.MONGO_URL)
     console.log("MongoDb Connected Successfully");
 
     // Backend Server
-    app.get('/',(req,res)=>{
-        res.status(200).send("Api is Working");
-    })
+    app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"));
+});
     app.use('/api/auth',authRouter);
     // Server Starting
     app.listen(Port,()=>{

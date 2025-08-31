@@ -1,0 +1,233 @@
+/* ✅ Base Layout */
+.MainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 15px;
+  background: linear-gradient(135deg, #0d0b2f, #1e1b47);
+  min-height: 100vh; /* full viewport height */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.student-container {
+  width: 100%;
+  max-width: 1100px;
+  background: linear-gradient(135deg, #1e1b47, #3a1c71);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+  color: white;
+  text-align: center;
+}
+
+/* ✅ Responsive Grid */
+.student-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  justify-content: center;
+}
+
+/* ✅ Card Styles */
+.student-card {
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 15px;
+  text-align: left;
+  transition: transform 0.3s, background 0.3s;
+  word-wrap: break-word;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 🌙 Dark Mode hover */
+.student-card:hover {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.03);
+}
+
+/* ✅ Light Mode */
+.light .MainContainer {
+  background: linear-gradient(135deg, #f9f9f9, #e6e6e6);
+}
+
+.light .student-container {
+  background: linear-gradient(135deg, #ffffff, #f4f4f4);
+  color: #222;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.light .student-card {
+  background: rgba(0,0,0,0.05);
+  color: #222;
+}
+
+.light .student-card:hover {
+  background: rgba(0,0,0,0.1);
+}
+
+/* ✅ Actions */
+.student-actions {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.update-button,
+.delete-button {
+  flex: 1;
+  min-width: 100px;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  text-align: center;
+}
+
+/* 🟣 Update button */
+.update-button {
+  background: #6a0dad;
+  color: white;
+}
+.update-button:hover {
+  background: #8a2be2;
+  transform: scale(1.05);
+}
+
+/* 🔴 Delete button */
+.delete-button {
+  background: #e63946;
+  color: white;
+}
+.delete-button:hover {
+  background: #ff4b5c;
+  transform: scale(1.05);
+}
+
+/* ☀️ Light Mode Buttons */
+.light .update-button {
+  background: #4CAF50;
+}
+.light .update-button:hover {
+  background: #45a049;
+}
+.light .delete-button {
+  background: #f44336;
+}
+.light .delete-button:hover {
+  background: #e53935;
+}
+
+/* ✅ Toggle Button */
+.toggle-btn {
+  margin: 0 auto 20px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  background: #6a0dad;
+  color: white;
+  display: block;
+}
+.toggle-btn:hover {
+  background: #8a2be2;
+  transform: scale(1.05);
+}
+.light .toggle-btn {
+  background: #333;
+}
+.light .toggle-btn:hover {
+  background: #555;
+}
+.register-btn {
+  background: linear-gradient(135deg, #6a0dad, #8a2be2);
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin: 10px 0 20px 10px;
+  box-shadow: 0 4px 10px rgba(0, 200, 83, 0.4);
+}
+
+.register-btn:hover {
+  background: linear-gradient(135deg, #43a047, #66bb6a);
+  transform: scale(1.07);
+  box-shadow: 0 6px 14px rgba(0, 200, 83, 0.5);
+}
+
+.register-btn:active {
+  transform: scale(0.95);
+  background: linear-gradient(135deg, #2e7d32, #388e3c);
+}
+
+/* ☀️ Light Mode */
+.light .register-btn {
+  background: linear-gradient(135deg, #2196f3, #42a5f5);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(33, 150, 243, 0.4);
+}
+
+.light .register-btn:hover {
+  background: linear-gradient(135deg, #42a5f5, #64b5f6);
+  box-shadow: 0 6px 14px rgba(33, 150, 243, 0.5);
+}
+/* 📱 Mobile & Tablet Alignment Fix */
+@media (max-width: 992px) { /* Tablet */
+  .student-container {
+    padding: 20px;
+  }
+  .student-heading {
+    font-size: 1.6rem;
+  }
+  .student-list {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 768px) { /* Mobile Landscape */
+  .student-heading {
+    font-size: 1.4rem;
+  }
+  .student-card {
+    padding: 12px;
+    text-align: center; /* better centered for small devices */
+  }
+  .student-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  .update-button,
+  .delete-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) { /* Small Phones */
+  .student-heading {
+    font-size: 1.2rem;
+  }
+  .student-list {
+    grid-template-columns: 1fr; /* single column */
+  }
+  .student-card {
+    padding: 10px;
+  }
+  .student-card p {
+    font-size: 0.9rem;
+    text-align: left;
+  }
+}

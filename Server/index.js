@@ -26,18 +26,13 @@ app.use('/api/auth', authRouter);
 app.use(express.static(path.join(__dirname, "client/build")));
 
 mongoose.connect(process.env.MONGO_URL)
-.then(() => {
+  .then(() => {
     console.log("MongoDB Connected Successfully");
 
-    // React catch-all (after API routes)
-    app.get("*", (req, res) => {
-        res.sendFile(path.join(__dirname, "client/build", "index.html"));
+    app.listen(PORT, () => {
+        console.log("Server is running on Port", PORT);
     });
-
-    app.listen(Port, () => {
-        console.log("Server is running on Port", Port);
-    });
-})
-.catch((error) => {
+  })
+  .catch((error) => {
     console.log("Server Error", error);
-});
+  });

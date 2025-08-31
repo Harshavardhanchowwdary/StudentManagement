@@ -12,7 +12,10 @@ const Port = process.env.PORT || 5000;
 dotenv.config();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: "https://studentmanagementfrontend-gr59.onrender.com",
+    credentials: true
+}));
 app.use(cookieParser());
 app.use(express.json()); // important for POST requests
 
